@@ -4,27 +4,30 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import java.util.jar.Attributes;
+
 
 
 public class Scaffold {
-    public static boolean scaffold(String obj, Directions directions,List<Attribute> prop) throws IOException {
-        String Page="package "+directions.getPackg()+";\n" +
+    public static boolean scaffold(Object object) throws IOException {
+        scaffold_java_file(object);
+        return true;
+    }
+    private static void scaffold_java_file(Object object) throws IOException {
+        String Page="package "+object.packg+";\n" +
                 "\n" +
                 "import org.springframework.data.annotation.Id;\n" +
                 "\n" +
                 "import javax.persistence.Entity;\n";
         String Class="@Entity\n" +
-                "public class "+obj+"{\n";
-        String Prop=create_props(prop);
-        String Setters=create_setters(prop);
-        String java=Page+Class+Prop+Setters;
-        write_model_file(java, directions);
-        return true;
+                "public class "+object.name+"{\n";
+        String Prop=create_props(object.attributes);
+        String Setters=create_setters(object.attributes);
+        String java=Page+Class+Prop+Setters+"}";
+        write_model_file(java, object);
     }
 
-    private static void write_model_file(String java,Directions directions) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(directions.JavaFile));
+    private static void write_model_file(String java,Object object) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(object.directions.JavaFile));
         writer.write(java);
         writer.close();
     }

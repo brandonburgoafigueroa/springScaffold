@@ -9,19 +9,20 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Screen {
-    Directions directions;
     Scanner scanner;
     String input;
+    Object object;
     public Screen()
     {
-        directions =new Directions();
         scanner=new Scanner(System.in);
+        object=new Object();
+        object.directions=new Directions();
     }
     public void setup() throws IOException {
         System.out.println("Ingrese la direccion de la carpeta donde se encuentran los modelos");
         System.out.println("(De preferencia si se encuentran en el package principal ya que \n los archivos que se generaran se guardaran en esta misma ruta)");
         input=scanner.nextLine();
-        directions.setPath(input);
+        object.directions.setPath(input);
         if (is_folder_valid())
         {
             System.out.println("Carpeta verificada");
@@ -47,15 +48,16 @@ public class Screen {
             }
             else
             {
-                directions.setup(input);
-                scaffold(input);
+                object.directions.setup(input);
+                scaffold();
             }
         }
     }
 
-    private void scaffold(String obj) throws IOException {
+    private void scaffold() throws IOException {
         List<Attribute> attributes=get_attributes();
-        if (Scaffold.scaffold(obj, directions, attributes))
+        object.attributes=attributes;
+        if (Scaffold.scaffold(object))
         {
             System.out.println("Archivos creados exitosamente");
         }
@@ -112,11 +114,11 @@ public class Screen {
         System.out.println("App iniciada, Puede detener todo el proceso ingresando (-)");
         System.out.println("Ingrese el nombre del package");
         input=scanner.nextLine();
-        directions.setPackg(input);
+        object.packg=input;
     }
 
     private boolean is_folder_valid() {
-        File file = new File(directions.getPath());
+        File file = new File(object.directions.getPath());
         return file.exists()&&file.isDirectory();
     }
 }
