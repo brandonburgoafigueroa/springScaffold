@@ -39,7 +39,6 @@ public class Screen {
         while (state)
         {
             System.out.println("      ");
-            System.out.println("      ");
             System.out.println("Ingrese el nombre del modelo");
             input=scanner.nextLine();
             if (input.equals("-q"))
@@ -48,6 +47,7 @@ public class Screen {
             }
             else
             {
+                directions.setup(input);
                 scaffold(input);
             }
         }
@@ -70,9 +70,9 @@ public class Screen {
         List<Attribute> attributes=new ArrayList<>();
         System.out.println("Ingrese en el siguiente formato los atributos");
         System.out.println("Al terminar ingrese --q para continuar el proceso");
-        System.out.println("NAME_OF_PROP:TYPE_OF_DATA");
+        System.out.println("NAME_OF_PROP:TYPE_OF_DATA:(KEY):(AUTO, IDENTITY)");
         System.out.println("ejemplo:");
-        System.out.println("    nombre:String");
+        System.out.println("    nombre:String:Key:Auto");
         System.out.println("    edad:int");
         System.out.println("    fecha_de_cumpleaños:Date");
         while(state)
@@ -95,7 +95,17 @@ public class Screen {
 
     private Attribute read_attrib(String input) {
         String[] data=input.split(":");
-        return new Attribute(data[1], data[0]);
+        if (data.length==3)
+        {
+            return new Attribute(data[1], data[0], data[2], "");
+        }
+        if (data.length==4)
+        {
+            return new Attribute(data[1], data[0], data[2], data[3]);
+        }
+        else {
+            return new Attribute(data[1], data[0], "", "");
+        }
     }
 
     private void init() {
