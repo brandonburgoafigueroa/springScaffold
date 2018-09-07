@@ -1,16 +1,13 @@
 package com.ucbcba.edu.bo;
 
 public class CommandsManager {
-    public String execute(String s) {
-        switch (s)
-        {
-            case "--h":
-                return helpMessage;
-        }
-        return "";
+    private String path;
+
+    public String getPath() {
+        return path;
     }
-    private String helpMessage="" +
-            "   Scaffold Spring 1.0" +"\n"+
-            "   --h (Muestra este mensaje de ayuda)" +"\n"+
-            "   --d (Asigna la ubicacion donde se generaran las clases)";
+
+    public void setPath(String input) {
+        path=input;
+    }
 }
