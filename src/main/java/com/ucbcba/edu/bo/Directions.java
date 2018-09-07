@@ -1,6 +1,6 @@
 package com.ucbcba.edu.bo;
 
-public class CommandsManager {
+public class Directions {
     private String path;
 
     public String getPath() {
