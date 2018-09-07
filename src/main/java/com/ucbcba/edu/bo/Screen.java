@@ -40,7 +40,7 @@ public class Screen {
         {
             System.out.println("      ");
             System.out.println("      ");
-            System.out.println("Ingrese el nombre de la clase");
+            System.out.println("Ingrese el nombre del modelo");
             input=scanner.nextLine();
             if (input.equals("-q"))
             {
@@ -95,11 +95,14 @@ public class Screen {
 
     private Attribute read_attrib(String input) {
         String[] data=input.split(":");
-        return new Attribute(data[0], data[1]);
+        return new Attribute(data[1], data[0]);
     }
 
     private void init() {
         System.out.println("App iniciada, Puede detener todo el proceso ingresando (-)");
+        System.out.println("Ingrese el nombre del package");
+        input=scanner.nextLine();
+        directions.setPackg(input);
     }
 
     private boolean is_folder_valid() {
