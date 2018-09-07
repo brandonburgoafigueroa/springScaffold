@@ -2,7 +2,7 @@ package com.ucbcba.edu.bo;
 
 public class Directions {
     private String path;
-    
+
     public String JavaFile;
 
 
@@ -13,7 +13,7 @@ public class Directions {
     public void setPath(String input) {
         path=input;
     }
-
+ 
 
     public void setup(String obj)
     {
