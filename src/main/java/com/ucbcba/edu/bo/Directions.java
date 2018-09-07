@@ -13,7 +13,7 @@ public class Directions {
     public void setPath(String input) {
         path=input;
     }
- 
+
 
     public void setup(String obj)
     {
